@@ -30,7 +30,8 @@ public class main {
 //        wareHouseCreateDto.setCreatedDate(LocalDateTime.now());
 //        wareHouseService.create(wareHouseCreateDto);
 
-        System.out.println(wareHouseService.retrieveById(1));
+//        System.out.println(wareHouseService.retrieveById(1));
+        System.out.println(wareHouseService.retrieveAll());
 
     }
 }
