@@ -1,5 +1,7 @@
 package model;
 
+import java.util.function.Function;
+
 public class WareHouseProduct extends BaseEntity{
     private long id;
     private String name;

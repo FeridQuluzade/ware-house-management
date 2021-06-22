@@ -12,17 +12,17 @@ public class main {
     public static void main(String[] args) {
         WareHouseService wareHouseService = new WareHouseServiceImpl();
 
-//        WareHouseCreateDto wareHouseCreateDto = new WareHouseCreateDto();
-//
+        WareHouseCreateDto wareHouseCreateDto = new WareHouseCreateDto();
+
 //        WareHouseUpdateDto wareHouseUpdateDto= new WareHouseUpdateDto();
 //        wareHouseUpdateDto.setCount(20L);
 //        wareHouseUpdateDto.setSellRate(180);
 //        wareHouseUpdateDto.setBuyRate(220);
-//        wareHouseUpdateDto.setUpdatedDate(LocalDateTime.now());
-//        wareHouseUpdateDto.setId(2);
+//wareHouseUpdateDto.setUpdatedDate(LocalDateTime.now());
+//        wareHouseUpdateDto.setId(10);
 //        wareHouseService.update(wareHouseUpdateDto);
 
-
+wareHouseService.deleteById(10);
 //        wareHouseCreateDto.setName("Floor");
 //        wareHouseCreateDto.setCount(22L);
 //        wareHouseCreateDto.setSellRate(200);
@@ -31,7 +31,7 @@ public class main {
 //        wareHouseService.create(wareHouseCreateDto);
 
 //        System.out.println(wareHouseService.retrieveById(1));
-        System.out.println(wareHouseService.retrieveAll());
+//        System.out.println(wareHouseService.retrieveAll());
 
     }
 }
