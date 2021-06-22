@@ -118,15 +118,16 @@ public class WareHouseRepository {
         try {
             Connection connection = postgreDbService.connection();
 
-            String query = "Update warehouse_product set count=?,buy_rate=?,sell_rate=?,updated_date=?" +
+            String query = "Update warehouse_product set name=?,count=?,buy_rate=?,sell_rate=?,updated_date=?" +
                     "where productid=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, wareHouseProduct.getCount());
-            preparedStatement.setDouble(2, wareHouseProduct.getBuyRate());
-            preparedStatement.setDouble(3, wareHouseProduct.getSellRate());
-            preparedStatement.setTimestamp(4, Timestamp.valueOf(wareHouseProduct.getUpdatedDate()));
-            preparedStatement.setLong(5, wareHouseProduct.getId());
+            preparedStatement.setString(1, wareHouseProduct.getName());
+            preparedStatement.setLong(2, wareHouseProduct.getCount());
+            preparedStatement.setDouble(3, wareHouseProduct.getBuyRate());
+            preparedStatement.setDouble(4, wareHouseProduct.getSellRate());
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(wareHouseProduct.getUpdatedDate()));
+            preparedStatement.setLong(6, wareHouseProduct.getId());
             preparedStatement.executeUpdate();
 
             preparedStatement.close();

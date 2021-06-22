@@ -1,5 +1,6 @@
 package test;
 
+import config.AutoFill;
 import dto.WareHouseCreateDto;
 import dto.WareHouseUpdateDto;
 import service.WareHouseService;
@@ -22,7 +23,11 @@ public class main {
 //        wareHouseUpdateDto.setId(10);
 //        wareHouseService.update(wareHouseUpdateDto);
 
-wareHouseService.deleteById(10);
+        AutoFill autoFill= new AutoFill();
+      autoFill.findAll();
+
+
+
 //        wareHouseCreateDto.setName("Floor");
 //        wareHouseCreateDto.setCount(22L);
 //        wareHouseCreateDto.setSellRate(200);

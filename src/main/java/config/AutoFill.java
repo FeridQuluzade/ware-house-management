@@ -2,12 +2,15 @@ package config;
 
 
 import dto.WareHouseCreateDto;
+import dto.WareHouseDto;
 import dto.WareHouseUpdateDto;
+import model.WareHouseProduct;
+import org.modelmapper.ModelMapper;
 import service.WareHouseService;
 import service.WareHouseServiceImpl;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 import java.util.Scanner;
 
 public class AutoFill {
@@ -19,7 +22,42 @@ public class AutoFill {
         scanner = new Scanner(System.in);
     }
 
-    public String addItem() {
+    public void findAll() {
+        List<WareHouseDto> wareHouseDtos= wareHouseService
+                .retrieveAll();
+        System.out.println("ID" + " || " + "name" + "    || " + "count" + " || " + "buy rate" + " || " + "sell rate" + " || " + "earn money ");
+        for (WareHouseDto w:
+             wareHouseDtos) {
+            findById(w.getId());
+        }
+    }
+
+    public void findById() {
+        System.out.print("Enter the id to search: ");
+
+        WareHouseUpdateDto wareHouseUpdateDto = wareHouseService.retrieveById(scanner.nextLong());
+
+        double d = (wareHouseUpdateDto.getSellRate() - wareHouseUpdateDto.getBuyRate())*wareHouseUpdateDto.getCount();
+
+        System.out.print("ID" + " || " + "name" + "    || " + "count" + " || " + "buy rate" + " || " + "sell rate" + " || " + "earn money ");
+        System.out.println();
+        System.out.println(wareHouseUpdateDto.getId() + "  || " + wareHouseUpdateDto.getName() + "   || " + wareHouseUpdateDto.getCount() + "    || "
+                + wareHouseUpdateDto.getBuyRate() + "    ||  " + wareHouseUpdateDto.getSellRate() + "    ||  " + d);
+
+
+    }
+
+    public void findById(long id) {
+
+        WareHouseUpdateDto wareHouseUpdateDto = wareHouseService.retrieveById(id);
+
+        double d = (wareHouseUpdateDto.getSellRate() - wareHouseUpdateDto.getBuyRate())*wareHouseUpdateDto.getCount();
+
+        System.out.println(wareHouseUpdateDto.getId() + "  || " + wareHouseUpdateDto.getName() + "   || " + wareHouseUpdateDto.getCount() + "    || "
+                + wareHouseUpdateDto.getBuyRate() + "    ||  " + wareHouseUpdateDto.getSellRate() + "    ||  " + d);
+    }
+
+    public void addItem() {
         WareHouseCreateDto wareHouseCreateDto = new WareHouseCreateDto();
 
         System.out.print("Enter product name:");
@@ -40,13 +78,37 @@ public class AutoFill {
         wareHouseCreateDto.setCreatedDate(LocalDateTime.now());
 
 
-       return "Successfully add this product ,product id:"+wareHouseService.create(wareHouseCreateDto);
+        System.out.println(("Successfully added this product ,product id:" + wareHouseService.create(wareHouseCreateDto)));
     }
 
-//    public String updateItem(){
-//        WareHouseUpdateDto wareHouseUpdateDto= new WareHouseUpdateDto();
-//
-//    }
+    public void updateItem() {
+        WareHouseUpdateDto wareHouseUpdateDto = new WareHouseUpdateDto();
 
+        System.out.print("Enter the id of the product you want to change:");
+        wareHouseUpdateDto.setId(scanner.nextLong());
+
+        System.out.print("Enter the count of the product you want to change:");
+        wareHouseUpdateDto.setCount(scanner.nextLong());
+
+        System.out.print("Enter the sell rate of the product you want to change:");
+        wareHouseUpdateDto.setSellRate(scanner.nextDouble());
+
+        System.out.print("Enter the sell rate of the product you want to change:");
+        wareHouseUpdateDto.setBuyRate(scanner.nextDouble());
+
+        wareHouseUpdateDto.setUpdatedDate(LocalDateTime.now());
+
+        wareHouseService.update(wareHouseUpdateDto);
+
+        System.out.println(("Successfully updated this product, product id:" + wareHouseUpdateDto.getId()));
+    }
+
+    public void deleteItem() {
+        System.out.print("Enter the id of the product you want to delete :");
+        long id = scanner.nextLong();
+
+        wareHouseService.deleteById(id);
+        System.out.println(("Successfully deleted this product ,product id: " + id));
+    }
 
 }
