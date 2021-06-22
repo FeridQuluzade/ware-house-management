@@ -8,7 +8,10 @@ import exception.WareHouseProductNotFoundException;
 import model.WareHouseProduct;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WareHouseServiceImpl implements WareHouseService {
@@ -47,13 +50,27 @@ public class WareHouseServiceImpl implements WareHouseService {
 
     @Override
     public void update(WareHouseUpdateDto wareHouseUpdateDto) {
-        WareHouseProduct wareHouseProduct = modelMapper.map(wareHouseUpdateDto, WareHouseProduct.class);
-        wareHouseRepository.update(wareHouseProduct);
+        Optional<WareHouseProduct> optionalWareHouseProduct = wareHouseRepository
+                .retrieveById(wareHouseUpdateDto.getId())
+                .stream()
+                .findAny();
+
+        if (optionalWareHouseProduct.isPresent()) {
+            WareHouseProduct wareHouseProduct = modelMapper.map(wareHouseUpdateDto, WareHouseProduct.class);
+            wareHouseRepository.update(wareHouseProduct);
+        } else throw new WareHouseProductNotFoundException("Product Not Found !");
     }
 
     @Override
     public void deleteById(long id) {
-        wareHouseRepository.deleteByİd(id);
+        Optional<WareHouseProduct> optionalWareHouseProduct = wareHouseRepository
+                .retrieveById(id)
+                .stream()
+                .findAny();
+
+        if (optionalWareHouseProduct.isPresent()) {
+            wareHouseRepository.deleteByİd(id);
+        } else throw new WareHouseProductNotFoundException("Product Not Found !");
     }
 
 }
