@@ -3,6 +3,7 @@ package service;
 import dao.WareHouseRepository;
 import dto.WareHouseCreateDto;
 import dto.WareHouseUpdateDto;
+import exception.WareHouseProductNotFoundException;
 import model.WareHouseProduct;
 import org.modelmapper.ModelMapper;
 
@@ -14,6 +15,15 @@ public class WareHouseServiceImpl implements WareHouseService {
     public WareHouseServiceImpl() {
         wareHouseRepository = new WareHouseRepository();
         modelMapper = new ModelMapper();
+    }
+
+    @Override
+    public WareHouseUpdateDto retrieveById(long id) {
+      WareHouseProduct wareHouseProduct=wareHouseRepository
+              .retrieveById(id)
+              .orElseThrow(()-> new WareHouseProductNotFoundException("Product Not Found ! by Id"));
+
+      return modelMapper.map(wareHouseProduct,WareHouseUpdateDto.class);
     }
 
     @Override
