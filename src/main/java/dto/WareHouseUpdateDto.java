@@ -3,10 +3,20 @@ package dto;
 import shared.UpdateDto;
 
 public class WareHouseUpdateDto extends UpdateDto {
-
+private long id;
     private long count;
     private double buyRate;
     private double sellRate;
+
+    public WareHouseUpdateDto() {
+    }
+
+    public WareHouseUpdateDto(long id, long count, double buyRate, double sellRate) {
+        this.id = id;
+        this.count = count;
+        this.buyRate = buyRate;
+        this.sellRate = sellRate;
+    }
 
     public long getCount() {
         return count;
@@ -32,16 +42,19 @@ public class WareHouseUpdateDto extends UpdateDto {
         this.sellRate = sellRate;
     }
 
-    public WareHouseUpdateDto(long count, double buyRate, double sellRate) {
-        this.count = count;
-        this.buyRate = buyRate;
-        this.sellRate = sellRate;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "WareHouseUpdateDto{" +
-                "count=" + count +
+                "id=" + id +
+                ", count=" + count +
                 ", buyRate=" + buyRate +
                 ", sellRate=" + sellRate +
                 '}';

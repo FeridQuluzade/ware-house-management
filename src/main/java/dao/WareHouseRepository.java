@@ -10,7 +10,7 @@ public class WareHouseRepository {
     private final PostgreDbService postgreDbService;
 
     public WareHouseRepository() {
-        postgreDbService= new PostgreDbService();
+        postgreDbService = new PostgreDbService();
     }
 
     public long create(WareHouseProduct wareHouseProduct) {
@@ -54,11 +54,11 @@ public class WareHouseRepository {
                     "where productid=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1,wareHouseProduct.getCount());
-            preparedStatement.setDouble(2,wareHouseProduct.getBuyRate());
-            preparedStatement.setDouble(3,wareHouseProduct.getSellRate());
+            preparedStatement.setLong(1, wareHouseProduct.getCount());
+            preparedStatement.setDouble(2, wareHouseProduct.getBuyRate());
+            preparedStatement.setDouble(3, wareHouseProduct.getSellRate());
             preparedStatement.setTimestamp(4, Timestamp.valueOf(wareHouseProduct.getUpdatedDate()));
-            preparedStatement.setLong(5,wareHouseProduct.getId());
+            preparedStatement.setLong(5, wareHouseProduct.getId());
             preparedStatement.executeUpdate();
 
             preparedStatement.close();
@@ -69,5 +69,24 @@ public class WareHouseRepository {
         }
     }
 
+    public void deleteByİd(long id) {
+        try{
+            Connection connection=postgreDbService.connection();
+
+            String query="DELETE   from warehouse_product " +
+                    "where  productid=?";
+
+            PreparedStatement preparedStatement= connection.prepareStatement(query);
+            preparedStatement.setLong(1,id);
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            connection.close();
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
 
 }
