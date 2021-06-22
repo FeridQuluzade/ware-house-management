@@ -5,12 +5,48 @@ import model.WareHouseProduct;
 import shared.PostgreDbService;
 
 import java.sql.*;
+import java.util.Optional;
 
 public class WareHouseRepository {
     private final PostgreDbService postgreDbService;
 
     public WareHouseRepository() {
         postgreDbService = new PostgreDbService();
+    }
+
+    public Optional<WareHouseProduct> retrieveById(long id) {
+
+        try {
+            Optional<WareHouseProduct> optionalWareHouseProduct = Optional.empty();
+
+            Connection connection = postgreDbService.connection();
+
+            String query = "select * from warehouse_product where productid=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString("name");
+                Long count = resultSet.getLong("count");
+                double buy_rate = resultSet.getDouble("buy_rate");
+                double sell_rate = resultSet.getDouble("sell_rate");
+                WareHouseProduct wareHouseProduct = new WareHouseProduct(id, name, count, buy_rate, sell_rate);
+                optionalWareHouseProduct = Optional.of(wareHouseProduct);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            resultSet.close();
+
+            return optionalWareHouseProduct;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 
     public long create(WareHouseProduct wareHouseProduct) {
@@ -70,20 +106,20 @@ public class WareHouseRepository {
     }
 
     public void deleteByİd(long id) {
-        try{
-            Connection connection=postgreDbService.connection();
+        try {
+            Connection connection = postgreDbService.connection();
 
-            String query="DELETE   from warehouse_product " +
+            String query = "DELETE   from warehouse_product " +
                     "where  productid=?";
 
-            PreparedStatement preparedStatement= connection.prepareStatement(query);
-            preparedStatement.setLong(1,id);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
 
             preparedStatement.close();
             connection.close();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
 
