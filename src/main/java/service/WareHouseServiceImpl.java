@@ -2,10 +2,14 @@ package service;
 
 import dao.WareHouseRepository;
 import dto.WareHouseCreateDto;
+import dto.WareHouseDto;
 import dto.WareHouseUpdateDto;
 import exception.WareHouseProductNotFoundException;
 import model.WareHouseProduct;
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WareHouseServiceImpl implements WareHouseService {
 
@@ -18,12 +22,21 @@ public class WareHouseServiceImpl implements WareHouseService {
     }
 
     @Override
-    public WareHouseUpdateDto retrieveById(long id) {
-      WareHouseProduct wareHouseProduct=wareHouseRepository
-              .retrieveById(id)
-              .orElseThrow(()-> new WareHouseProductNotFoundException("Product Not Found ! by Id"));
+    public List<WareHouseDto> retrieveAll() {
+        return wareHouseRepository
+                .retrieveAll()
+                .stream()
+                .map(wareHouseProduct -> modelMapper.map(wareHouseProduct, WareHouseDto.class))
+                .collect(Collectors.toList());
+    }
 
-      return modelMapper.map(wareHouseProduct,WareHouseUpdateDto.class);
+    @Override
+    public WareHouseUpdateDto retrieveById(long id) {
+        WareHouseProduct wareHouseProduct = wareHouseRepository
+                .retrieveById(id)
+                .orElseThrow(() -> new WareHouseProductNotFoundException("Product Not Found ! by Id"));
+
+        return modelMapper.map(wareHouseProduct, WareHouseUpdateDto.class);
     }
 
     @Override
@@ -40,7 +53,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
     @Override
     public void deleteById(long id) {
-          wareHouseRepository.deleteByİd(id);
+        wareHouseRepository.deleteByİd(id);
     }
 
 }

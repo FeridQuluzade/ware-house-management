@@ -5,6 +5,8 @@ import model.WareHouseProduct;
 import shared.PostgreDbService;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class WareHouseRepository {
@@ -13,6 +15,36 @@ public class WareHouseRepository {
     public WareHouseRepository() {
         postgreDbService = new PostgreDbService();
     }
+
+    public List<WareHouseProduct> retrieveAll() {
+        try {
+            List<WareHouseProduct> wareHouseProducts = new ArrayList<>();
+
+            Connection connection = postgreDbService.connection();
+            String query = "select * from warehouse_product";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("productid");
+                String name= resultSet.getString("name");
+                Long count= resultSet.getLong("count");
+                Double buyRate=resultSet.getDouble("buy_rate");
+                Double sellRate=resultSet.getDouble("sell_rate");
+                wareHouseProducts.add(new WareHouseProduct(id,name,count,buyRate,sellRate));
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+
+            return wareHouseProducts;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 
     public Optional<WareHouseProduct> retrieveById(long id) {
 

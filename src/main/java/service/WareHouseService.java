@@ -1,10 +1,15 @@
 package service;
 
 import dto.WareHouseCreateDto;
+import dto.WareHouseDto;
 import dto.WareHouseUpdateDto;
+
+import java.util.List;
 
 
 public interface WareHouseService {
+
+  List<WareHouseDto> retrieveAll();
 
     WareHouseUpdateDto retrieveById(long id);
 
