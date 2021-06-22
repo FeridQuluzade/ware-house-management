@@ -58,7 +58,7 @@ public class WareHouseServiceImpl implements WareHouseService {
         if (optionalWareHouseProduct.isPresent()) {
             WareHouseProduct wareHouseProduct = modelMapper.map(wareHouseUpdateDto, WareHouseProduct.class);
             wareHouseRepository.update(wareHouseProduct);
-        } else throw new WareHouseProductNotFoundException("Product Not Found !");
+        } else throw new WareHouseProductNotFoundException("Product is not exist !");
     }
 
     @Override
@@ -70,7 +70,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
         if (optionalWareHouseProduct.isPresent()) {
             wareHouseRepository.deleteByİd(id);
-        } else throw new WareHouseProductNotFoundException("Product Not Found !");
+        } else throw new WareHouseProductNotFoundException("Product is not exist !");
     }
 
 }

@@ -4,6 +4,7 @@ import shared.UpdateDto;
 
 public class WareHouseUpdateDto extends UpdateDto {
 private long id;
+private String name;
     private long count;
     private double buyRate;
     private double sellRate;
@@ -11,11 +12,28 @@ private long id;
     public WareHouseUpdateDto() {
     }
 
-    public WareHouseUpdateDto(long id, long count, double buyRate, double sellRate) {
+    public WareHouseUpdateDto(long id, String name, long count, double buyRate, double sellRate) {
         this.id = id;
+        this.name = name;
         this.count = count;
         this.buyRate = buyRate;
         this.sellRate = sellRate;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getCount() {
@@ -42,18 +60,11 @@ private long id;
         this.sellRate = sellRate;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "WareHouseUpdateDto{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", count=" + count +
                 ", buyRate=" + buyRate +
                 ", sellRate=" + sellRate +
