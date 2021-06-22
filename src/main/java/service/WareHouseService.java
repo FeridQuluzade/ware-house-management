@@ -10,4 +10,6 @@ public interface WareHouseService {
 
     void update(WareHouseUpdateDto wareHouseUpdateDto);
 
+    void deleteById(long id);
+
 }

@@ -28,4 +28,9 @@ public class WareHouseServiceImpl implements WareHouseService {
         wareHouseRepository.update(wareHouseProduct);
     }
 
+    @Override
+    public void deleteById(long id) {
+          wareHouseRepository.deleteByİd(id);
+    }
+
 }
