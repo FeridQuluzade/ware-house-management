@@ -1,8 +1,9 @@
 package dao;
 
-import dto.WareHouseCreateDto;
+
 import model.WareHouseProduct;
-import shared.PostgreDbService;
+import service.DbService;
+import service.PostgreDbServiceImpl;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,28 +11,28 @@ import java.util.List;
 import java.util.Optional;
 
 public class WareHouseRepository {
-    private final PostgreDbService postgreDbService;
+    private final DbService dbService;
 
     public WareHouseRepository() {
-        postgreDbService = new PostgreDbService();
+        dbService= new PostgreDbServiceImpl();
     }
 
     public List<WareHouseProduct> retrieveAll() {
         try {
             List<WareHouseProduct> wareHouseProducts = new ArrayList<>();
 
-            Connection connection = postgreDbService.connection();
+            Connection connection = dbService.connection();
             String query = "select * from warehouse_product";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 long id = resultSet.getLong("productid");
-                String name= resultSet.getString("name");
-                Long count= resultSet.getLong("count");
-                Double buyRate=resultSet.getDouble("buy_rate");
-                Double sellRate=resultSet.getDouble("sell_rate");
-                wareHouseProducts.add(new WareHouseProduct(id,name,count,buyRate,sellRate));
+                String name = resultSet.getString("name");
+                long count = resultSet.getLong("count");
+                double buyRate = resultSet.getDouble("buy_rate");
+                double sellRate = resultSet.getDouble("sell_rate");
+                wareHouseProducts.add(new WareHouseProduct(id, name, count, buyRate, sellRate));
             }
 
             resultSet.close();
@@ -51,7 +52,7 @@ public class WareHouseRepository {
         try {
             Optional<WareHouseProduct> optionalWareHouseProduct = Optional.empty();
 
-            Connection connection = postgreDbService.connection();
+            Connection connection = dbService.connection();
 
             String query = "select * from warehouse_product where productid=?";
 
@@ -62,7 +63,7 @@ public class WareHouseRepository {
 
             if (resultSet.next()) {
                 String name = resultSet.getString("name");
-                Long count = resultSet.getLong("count");
+                long count = resultSet.getLong("count");
                 double buy_rate = resultSet.getDouble("buy_rate");
                 double sell_rate = resultSet.getDouble("sell_rate");
                 WareHouseProduct wareHouseProduct = new WareHouseProduct(id, name, count, buy_rate, sell_rate);
@@ -84,7 +85,7 @@ public class WareHouseRepository {
     public long create(WareHouseProduct wareHouseProduct) {
 
         try {
-            Connection connection = postgreDbService.connection();
+            Connection connection = dbService.connection();
 
             String query = "insert  into warehouse_product(name,count,buy_rate,sell_rate,created_date) " +
                     "values(?,?,?,?,?)" +
@@ -116,7 +117,7 @@ public class WareHouseRepository {
 
     public void update(WareHouseProduct wareHouseProduct) {
         try {
-            Connection connection = postgreDbService.connection();
+            Connection connection = dbService.connection();
 
             String query = "Update warehouse_product set name=?,count=?,buy_rate=?,sell_rate=?,updated_date=?" +
                     "where productid=?";
@@ -138,9 +139,9 @@ public class WareHouseRepository {
         }
     }
 
-    public void deleteByİd(long id) {
+    public void deleteById(long id) {
         try {
-            Connection connection = postgreDbService.connection();
+            Connection connection = dbService.connection();
 
             String query = "DELETE   from warehouse_product " +
                     "where  productid=?";
