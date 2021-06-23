@@ -3,8 +3,8 @@ package dto;
 import shared.UpdateDto;
 
 public class WareHouseUpdateDto extends UpdateDto {
-private long id;
-private String name;
+    private long id;
+    private String name;
     private long count;
     private double buyRate;
     private double sellRate;

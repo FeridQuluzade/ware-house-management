@@ -4,8 +4,6 @@ package config;
 import dto.WareHouseCreateDto;
 import dto.WareHouseDto;
 import dto.WareHouseUpdateDto;
-import model.WareHouseProduct;
-import org.modelmapper.ModelMapper;
 import service.WareHouseService;
 import service.WareHouseServiceImpl;
 
@@ -23,11 +21,11 @@ public class AutoFill {
     }
 
     public void findAll() {
-        List<WareHouseDto> wareHouseDtos= wareHouseService
+        List<WareHouseDto> wareHouseDtos = wareHouseService
                 .retrieveAll();
         System.out.println("ID" + " || " + "name" + "    || " + "count" + " || " + "buy rate" + " || " + "sell rate" + " || " + "earn money ");
-        for (WareHouseDto w:
-             wareHouseDtos) {
+        for (WareHouseDto w :
+                wareHouseDtos) {
             findById(w.getId());
         }
     }
@@ -37,7 +35,7 @@ public class AutoFill {
 
         WareHouseUpdateDto wareHouseUpdateDto = wareHouseService.retrieveById(scanner.nextLong());
 
-        double d = (wareHouseUpdateDto.getSellRate() - wareHouseUpdateDto.getBuyRate())*wareHouseUpdateDto.getCount();
+        double d = (wareHouseUpdateDto.getSellRate() - wareHouseUpdateDto.getBuyRate()) * wareHouseUpdateDto.getCount();
 
         System.out.print("ID" + " || " + "name" + "    || " + "count" + " || " + "buy rate" + " || " + "sell rate" + " || " + "earn money ");
         System.out.println();
@@ -51,7 +49,7 @@ public class AutoFill {
 
         WareHouseUpdateDto wareHouseUpdateDto = wareHouseService.retrieveById(id);
 
-        double d = (wareHouseUpdateDto.getSellRate() - wareHouseUpdateDto.getBuyRate())*wareHouseUpdateDto.getCount();
+        double d = (wareHouseUpdateDto.getSellRate() - wareHouseUpdateDto.getBuyRate()) * wareHouseUpdateDto.getCount();
 
         System.out.println(wareHouseUpdateDto.getId() + "  || " + wareHouseUpdateDto.getName() + "   || " + wareHouseUpdateDto.getCount() + "    || "
                 + wareHouseUpdateDto.getBuyRate() + "    ||  " + wareHouseUpdateDto.getSellRate() + "    ||  " + d);

@@ -8,10 +8,8 @@ import exception.WareHouseProductNotFoundException;
 import model.WareHouseProduct;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WareHouseServiceImpl implements WareHouseService {
@@ -69,7 +67,7 @@ public class WareHouseServiceImpl implements WareHouseService {
                 .findAny();
 
         if (optionalWareHouseProduct.isPresent()) {
-            wareHouseRepository.deleteByİd(id);
+            wareHouseRepository.deleteById(id);
         } else throw new WareHouseProductNotFoundException("Product is not exist !");
     }
 

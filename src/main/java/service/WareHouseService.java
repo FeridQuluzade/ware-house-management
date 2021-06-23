@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface WareHouseService {
 
-  List<WareHouseDto> retrieveAll();
+    List<WareHouseDto> retrieveAll();
 
     WareHouseUpdateDto retrieveById(long id);
 
