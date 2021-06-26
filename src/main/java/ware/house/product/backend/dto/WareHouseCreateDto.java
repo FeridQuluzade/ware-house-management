@@ -1,29 +1,21 @@
-package dto;
+package ware.house.product.backend.dto;
 
-public class WareHouseDto {
-    private long id;
+import ware.house.product.backend.shared.CreateDto;
+
+public class WareHouseCreateDto extends CreateDto {
     private String name;
     private long count;
     private double buyRate;
     private double sellRate;
 
-    public WareHouseDto() {
+    public WareHouseCreateDto() {
     }
 
-    public WareHouseDto(long id, String name, long count, double buyRate, double sellRate) {
-        this.id = id;
+    public WareHouseCreateDto(String name, long count, double buyRate, double sellRate) {
         this.name = name;
         this.count = count;
         this.buyRate = buyRate;
         this.sellRate = sellRate;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -60,9 +52,8 @@ public class WareHouseDto {
 
     @Override
     public String toString() {
-        return "WareHouseDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "WareHouseCreateDto{" +
+                "name='" + name + '\'' +
                 ", count=" + count +
                 ", buyRate=" + buyRate +
                 ", sellRate=" + sellRate +

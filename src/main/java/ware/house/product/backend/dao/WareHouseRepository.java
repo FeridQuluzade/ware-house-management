@@ -1,20 +1,24 @@
-package dao;
+package ware.house.product.backend.dao;
 
 
-import model.WareHouseProduct;
-import service.DbService;
-import service.PostgreDbServiceImpl;
+import ware.house.product.backend.model.WareHouseProduct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import ware.house.product.backend.service.DbService;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class WareHouseRepository {
     private final DbService dbService;
 
-    public WareHouseRepository() {
-        dbService= new PostgreDbServiceImpl();
+    @Autowired
+    public WareHouseRepository(DbService dbService) {
+        this.dbService=dbService;
     }
 
     public List<WareHouseProduct> retrieveAll() {
@@ -32,7 +36,7 @@ public class WareHouseRepository {
                 long count = resultSet.getLong("count");
                 double buyRate = resultSet.getDouble("buy_rate");
                 double sellRate = resultSet.getDouble("sell_rate");
-                wareHouseProducts.add(new WareHouseProduct(id, name, count, buyRate, sellRate));
+                wareHouseProducts.add(new WareHouseProduct(id, name, count, buyRate, sellRate,count*(sellRate-buyRate)));
             }
 
             resultSet.close();
@@ -66,7 +70,7 @@ public class WareHouseRepository {
                 long count = resultSet.getLong("count");
                 double buy_rate = resultSet.getDouble("buy_rate");
                 double sell_rate = resultSet.getDouble("sell_rate");
-                WareHouseProduct wareHouseProduct = new WareHouseProduct(id, name, count, buy_rate, sell_rate);
+                WareHouseProduct wareHouseProduct = new WareHouseProduct(id, name, count, buy_rate, sell_rate,count*(sell_rate-buy_rate));
                 optionalWareHouseProduct = Optional.of(wareHouseProduct);
             }
 

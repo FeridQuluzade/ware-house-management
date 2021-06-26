@@ -1,4 +1,4 @@
-package service;
+package ware.house.product.backend.service;
 
 import java.sql.Connection;
 
