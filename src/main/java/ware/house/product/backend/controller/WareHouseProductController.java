@@ -24,7 +24,6 @@ public class WareHouseProductController {
     @GetMapping(value = "/retrieve-all")
     @ResponseBody
     public List<WareHouseDto> retrieveAll() {
-
         return wareHouseService.retrieveAll();
     }
 
@@ -43,7 +42,6 @@ public class WareHouseProductController {
     @PutMapping(value = "/update")
     public void update(@Valid @RequestBody WareHouseUpdateDto wareHouseUpdateDto) {
         wareHouseUpdateDto.setUpdatedDate(LocalDateTime.now());
-        wareHouseUpdateDto.setEarnMoney(wareHouseUpdateDto.getCount()*(wareHouseUpdateDto.getSellRate())- wareHouseUpdateDto.getBuyRate());
         wareHouseService.update(wareHouseUpdateDto);
     }
 

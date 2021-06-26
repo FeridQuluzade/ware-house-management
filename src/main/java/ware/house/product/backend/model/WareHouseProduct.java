@@ -8,7 +8,12 @@ public class WareHouseProduct extends BaseEntity {
     private double sellRate;
     private double earnMoney;
 
-    public WareHouseProduct(long id, String name, long count, double buyRate, double sellRate, double earnMoney) {
+    public WareHouseProduct(long id,
+                            String name,
+                            long count,
+                            double buyRate,
+                            double sellRate,
+                            double earnMoney) {
         this.id = id;
         this.name = name;
         this.count = count;
