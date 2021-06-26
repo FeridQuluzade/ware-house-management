@@ -1,4 +1,4 @@
-package model;
+package ware.house.product.backend.model;
 
 import java.time.LocalDateTime;
 

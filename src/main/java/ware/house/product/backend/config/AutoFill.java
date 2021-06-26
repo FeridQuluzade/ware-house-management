@@ -1,11 +1,10 @@
-package config;
+package ware.house.product.backend.config;
 
 
-import dto.WareHouseCreateDto;
-import dto.WareHouseDto;
-import dto.WareHouseUpdateDto;
-import service.WareHouseService;
-import service.WareHouseServiceImpl;
+import ware.house.product.backend.dto.WareHouseCreateDto;
+import ware.house.product.backend.dto.WareHouseDto;
+import ware.house.product.backend.dto.WareHouseUpdateDto;
+import ware.house.product.backend.service.WareHouseService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,9 +14,9 @@ public class AutoFill {
     private final WareHouseService wareHouseService;
     private final Scanner scanner;
 
-    public AutoFill() {
-        wareHouseService = new WareHouseServiceImpl();
-        scanner = new Scanner(System.in);
+    public AutoFill(WareHouseService wareHouseService, Scanner scanner) {
+        this.wareHouseService = wareHouseService;
+        this.scanner = scanner;
     }
 
     public void findAll() {
@@ -59,7 +58,7 @@ public class AutoFill {
         WareHouseCreateDto wareHouseCreateDto = new WareHouseCreateDto();
 
         System.out.print("Enter product name:");
-        wareHouseCreateDto.setName(scanner.nextLine());
+        wareHouseCreateDto.setName(scanner.next());
 
 
         System.out.print("Enter product's count:");
@@ -73,6 +72,7 @@ public class AutoFill {
         System.out.print("Enter product's sell rate:");
         wareHouseCreateDto.setSellRate(scanner.nextDouble());
 
+
         wareHouseCreateDto.setCreatedDate(LocalDateTime.now());
 
 
@@ -85,13 +85,13 @@ public class AutoFill {
         System.out.print("Enter the id of the product you want to change:");
         wareHouseUpdateDto.setId(scanner.nextLong());
 
-        System.out.print("Enter the count of the product you want to change:");
+        System.out.println("Enter the count of the product you want to change:");
         wareHouseUpdateDto.setCount(scanner.nextLong());
 
-        System.out.print("Enter the sell rate of the product you want to change:");
+        System.out.println("Enter the sell rate of the product you want to change:");
         wareHouseUpdateDto.setSellRate(scanner.nextDouble());
 
-        System.out.print("Enter the sell rate of the product you want to change:");
+        System.out.println("Enter the buy rate of the product you want to change:");
         wareHouseUpdateDto.setBuyRate(scanner.nextDouble());
 
         wareHouseUpdateDto.setUpdatedDate(LocalDateTime.now());

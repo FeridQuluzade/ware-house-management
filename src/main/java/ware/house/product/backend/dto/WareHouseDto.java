@@ -1,23 +1,23 @@
-package model;
+package ware.house.product.backend.dto;
 
-import java.util.function.Function;
-
-public class WareHouseProduct extends BaseEntity {
+public class WareHouseDto {
     private long id;
     private String name;
     private long count;
     private double buyRate;
     private double sellRate;
+    private double earnMoney;
 
-    public WareHouseProduct() {
+    public WareHouseDto() {
     }
 
-    public WareHouseProduct(long id, String name, long count, double buyRate, double sellRate) {
+    public WareHouseDto(long id, String name, long count, double buyRate, double sellRate, double earnMoney) {
         this.id = id;
         this.name = name;
         this.count = count;
         this.buyRate = buyRate;
         this.sellRate = sellRate;
+        this.earnMoney = earnMoney;
     }
 
     public long getId() {
@@ -60,14 +60,23 @@ public class WareHouseProduct extends BaseEntity {
         this.sellRate = sellRate;
     }
 
+    public double getEarnMoney() {
+        return earnMoney;
+    }
+
+    public void setEarnMoney(double earnMoney) {
+        this.earnMoney = earnMoney;
+    }
+
     @Override
     public String toString() {
-        return "WareHouseProduct{" +
+        return "WareHouseDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", count=" + count +
                 ", buyRate=" + buyRate +
                 ", sellRate=" + sellRate +
+                ", earnMoney=" + earnMoney +
                 '}';
     }
 }

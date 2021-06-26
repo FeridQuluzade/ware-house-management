@@ -1,8 +1,8 @@
-package service;
+package ware.house.product.backend.service;
 
-import dto.WareHouseCreateDto;
-import dto.WareHouseDto;
-import dto.WareHouseUpdateDto;
+import ware.house.product.backend.dto.WareHouseCreateDto;
+import ware.house.product.backend.dto.WareHouseDto;
+import ware.house.product.backend.dto.WareHouseUpdateDto;
 
 import java.util.List;
 
