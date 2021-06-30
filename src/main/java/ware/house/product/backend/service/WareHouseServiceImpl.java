@@ -1,14 +1,13 @@
 package ware.house.product.backend.service;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import ware.house.product.backend.dao.WareHouseRepository;
 import ware.house.product.backend.dto.WareHouseCreateDto;
 import ware.house.product.backend.dto.WareHouseDto;
 import ware.house.product.backend.dto.WareHouseUpdateDto;
 import ware.house.product.backend.exception.WareHouseProductNotFoundException;
 import ware.house.product.backend.model.WareHouseProduct;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +19,7 @@ public class WareHouseServiceImpl implements WareHouseService {
     private final WareHouseRepository wareHouseRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
+
     public WareHouseServiceImpl(WareHouseRepository wareHouseRepository, ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
         this.wareHouseRepository = wareHouseRepository;
