@@ -4,7 +4,7 @@
 #    active: @spring.profiles.active@
 app:
   datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/warehouseproducts
+    jdbc-url: jdbc:postgresql://localhost:5432/warehouse
     username: postgres
     password: Pass1234
     pool-size: 30

@@ -9,17 +9,21 @@ import java.sql.SQLException;
 
 @Service
 public class PostgreDbServiceImpl implements DbService {
-    @Value("org.postgresql.Driver")
-    private String driverName;
-
-    @Value("jdbc:postgresql://localhost/ATL")
-    private String url;
-
-    @Value("postgres")
-    private String username;
-
-    @Value("Pass1234")
-    private String password;
+//    @Value("org.postgresql.Driver")
+//    private String driverName;
+//
+//    @Value("jdbc:postgresql://localhost/warehouse")
+//    private String url;
+//
+//    @Value("postgres")
+//    private String username;
+//
+//    @Value("Pass1234")
+//    private String password;
+    private final String driverName="org.postgresql.Driver";
+    private final String url ="jdbc:postgresql://localhost/warehouse";
+    private final String username="postgres";
+    private final String password="Pass1234";
 
     @Override
     public Connection connection() {

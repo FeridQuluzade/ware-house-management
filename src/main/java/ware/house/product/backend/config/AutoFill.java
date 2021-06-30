@@ -84,7 +84,9 @@ public class AutoFill {
 
         System.out.print("Enter the id of the product you want to change:");
         wareHouseUpdateDto.setId(scanner.nextLong());
-
+        System.out.println("Enter the name of the product you want to change:");
+        wareHouseUpdateDto.setName(scanner.next());
+        System.out.println();
         System.out.println("Enter the count of the product you want to change:");
         wareHouseUpdateDto.setCount(scanner.nextLong());
 
